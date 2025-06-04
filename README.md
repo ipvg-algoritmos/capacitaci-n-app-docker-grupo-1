@@ -78,6 +78,19 @@ Accede a la app en [http://localhost:8000](http://localhost:8000).
 
 ---
 
+## Pasos para la instalación 
+### 1)Creación de entorno virtual
+Para Windows
+
+```bash
+python3 -m venv venv 
+```
+Para Linux
+```bash
+virtualenv venv -ppython3  
+```
+
+---
 ## ☁️ Despliegue en AWS EC2 (Ubuntu 22.04)
 
 ### 1. Instala Docker en EC2
