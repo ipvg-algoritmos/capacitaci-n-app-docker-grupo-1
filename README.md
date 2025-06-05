@@ -1,166 +1,145 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=19666495)
-# 🐳 Despliegue de una Aplicación Django con Docker y EC2 (Guía Educativa)
+# Despliegue de una aplicación Django con Docker🛥️ y EC2☁️
 
-## 📝 Introducción
+## 📜 Introducción
+Esta es una guía para diseñada para aprender a levantar una aplicación Django usando Docker, ejecutarla de forma local con SQLite y poder desplegarla en una instancia EC2 (Ubuntu 22.04).
 
-Este README está diseñado para estudiantes de Cloud Computing. Aprenderás a contenerizar una aplicación Django usando Docker, ejecutarla localmente con SQLite y desplegarla en una instancia EC2 (Ubuntu 22.04). El objetivo es fortalecer tus habilidades prácticas en DevOps y despliegue de aplicaciones en la nube.
+## 👨‍💻 Reconocimiento
+Proyecto basado en el repositorio de:
+[https://github.com/wdavilav/pos-store](https://github.com/wdavilav/pos-store)
 
-## 🔗 Reconocimiento
+Repositorio de apoyo: [https://github.com/patobalboa/pos-store-django](https://github.com/patobalboa/pos-store-django)
 
-Este proyecto se basa en el repositorio original:  
-[https://github.com/wdavilav/pos-store](https://github.com/wdavilav/pos-store)  
-¡Gracias a sus autores por compartir la base de este ejercicio!
+### 🚨 Nota
+La instancia debe estar creada previamente y el programa PuTTY ya abierto.
 
----
+## 🚧 Proceso de creación 
 
-## 🐳 Contenerización Local con Docker
-
-### 1. Clona el proyecto
-
+### 1) Entrar en usuario root
 ```bash
-git clone https://github.com/wdavilav/pos-store.git
-cd pos-store
+sudo su -
 ```
 
-### 2. Crea un `Dockerfile`
+### 2) Actualiza apt
+```bash
+apt update
+```
 
-Crea un archivo llamado `Dockerfile` en la raíz del proyecto con el siguiente contenido:
+### 3) Instalación de weasyprint
+```bash
+sudo apt install weasyprint
+```
 
-```dockerfile
-FROM python:3.11-slim
+### 4) Verifica versión instalada de python
+```bash
+python3 --version
+```
+En caso de no tener python instalado
+```bash
+apt install python3 python3-pip python3-venv git -y
+```
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+### 5) Crea una carpeta
+```bash
+mkdir Tucarpeta
+cd Tucarpeta
+```
 
+### 6) Clonamos el repositorio
+```bash
+git clone https://github.com/wdavilav/pos-store.git .
+```
+
+### 7) Creación del Docker
+```bash
+vim Dockerfile
+```
+Esto se pega dentro del Dockerfile
+```bash
+# Dockerfile
+FROM python:3.10-slim
+
+# Instalar dependencias necesarias
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpango1.0-0 \
+    libgdk-pixbuf2.0-0 \
+    libffi-dev \
+    libcairo2 \
+    && apt-get clean
+
+# Crear directorio de trabajo
 WORKDIR /app
 
-COPY requirements.txt .
+# Copiar requerimientos e instalar
+COPY deploy/txt/requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
+# Copiar el resto del proyecto
 COPY . .
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Copiar el entrypoint
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+# Puerto expuesto
+EXPOSE 8080
+
+# EntryPoint y comando por defecto
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
 ```
 
-### 3. Crea y configura `entrypoint.sh`
+## 📋 Pasos para la instalación
 
-Crea un archivo llamado `entrypoint.sh` en la raíz del proyecto:
-
-```bash
-#!/bin/bash
-python manage.py migrate
-python manage.py collectstatic --noinput
-python manage.py runserver 0.0.0.0:8000
-```
-
-Hazlo ejecutable:
-
-```bash
-chmod +x entrypoint.sh
-```
-
-### 4. Construye la imagen Docker
-
-```bash
-docker build -t pos-store:latest .
-```
-
-### 5. Ejecuta el contenedor con SQLite
-
-```bash
-docker run -it --rm -p 8000:8000 pos-store:latest
-```
-
-Accede a la app en [http://localhost:8000](http://localhost:8000).
-
----
-
-## Pasos para la instalación 
-### 1)Creación de entorno virtual
+### 1) Crear entorno virtual
 Para Windows
-
 ```bash
-python3 -m venv venv 
+python3 -m venv env
 ```
 Para Linux
 ```bash
-virtualenv venv -ppython3  
+virtualenv venv -ppython3
 ```
 
----
-## ☁️ Despliegue en AWS EC2 (Ubuntu 22.04)
-
-### 1. Instala Docker en EC2
-
-Conéctate por SSH y ejecuta:
-
+### 2) Activar entorno virtual
+Para Windows
 ```bash
-sudo apt update
-sudo apt install -y docker.io
-sudo systemctl enable --now docker
-sudo usermod -aG docker $USER
+cd venv\Scripts\activate.bat
 ```
-*Cierra y vuelve a abrir la sesión SSH para aplicar el grupo.*
-
-### 2. Clona el proyecto en EC2
-
+Para Linux
 ```bash
-git clone https://github.com/wdavilav/pos-store.git
-cd pos-store
+source env/bin/activate
 ```
 
-### 3. Construye y ejecuta el contenedor
-
+### 3) Instalar librerias de la carpeta deploy
 ```bash
-docker build -t pos-store:latest .
-docker run -d -p 8000:8000 pos-store:latest
+pip install -r deploy/txt/requirements.txt
 ```
 
-### 4. Configura el Security Group (SG) en AWS
+### 4) Crear las tablas de las bases de datos de las migraciones de django
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
 
-- Ve a la consola de EC2 > Instancias > [Tu instancia] > Security Groups.
-- Edita las reglas de entrada.
-- Agrega una regla:
-    - Tipo: Custom TCP
-    - Puerto: 8000
-    - Origen: 0.0.0.0/0 (o restringe según tu necesidad)
+### 5) Insertar datos iniciales en las entidades de los módulos de seguridad y usuario del sistema
+```bash
+python manage.py shell --command='from core.init import *'
+```
 
-### 5. Accede a la app
+### 6) Insertar datos iniciales de categorías, productos, clientes y ventas aleatorias (Paso opcional)
+```bash
+python manage.py shell --command='from core.utils import *'
+```
 
-Abre en tu navegador:  
-`http://<IP-PUBLICA-EC2>:8000`
+### 7) Iniciar servidor
+```bash
+python manage.py runserver 0.0.0.0:8080
+```
 
----
-
-## ✅ Resultado Esperado
-
-Deberías ver la aplicación Django ejecutándose y accesible desde tu navegador, tanto localmente como en la nube.
-
----
-
-## 🧼 Buenas Prácticas
-
-- Usa un archivo `.gitignore` para excluir archivos sensibles:
-    ```
-    __pycache__/
-    *.pyc
-    db.sqlite3
-    .env
-    ```
-- **Nunca subas `db.sqlite3` ni archivos de configuración sensibles al repositorio.**
-- Utiliza variables de entorno para credenciales y configuraciones.
-
----
-
-## 🎓 Notas Finales
-
-- Para producción, considera usar **PostgreSQL** en vez de SQLite.
-- Puedes extender este despliegue usando `docker-compose` para orquestar múltiples servicios (base de datos, backend, etc.).
-- Explora la documentación oficial de Django y Docker para mejores prácticas de seguridad y escalabilidad.
-
----
-
-¡Feliz aprendizaje y experimentación en la nube! 🚀
+### 8) Iniciar sesión en el sistema
+```bash
+username: admin
+password: hacker94
+```
