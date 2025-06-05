@@ -1,5 +1,5 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=19666495)
-# Despliegue de una aplicación Django con Docker🛥️ y EC2☁️
+# Despliegue de una aplicación Django en EC2☁️
 
 ## 📜 Introducción
 Esta es una guía para diseñada para aprender a levantar una aplicación Django usando Docker, ejecutarla de forma local con SQLite y poder desplegarla en una instancia EC2 (Ubuntu 22.04).
