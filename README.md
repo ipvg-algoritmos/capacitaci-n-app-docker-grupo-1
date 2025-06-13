@@ -10,7 +10,14 @@ Proyecto basado en el repositorio de:
 
 Repositorio de apoyo: [https://github.com/patobalboa/pos-store-django](https://github.com/patobalboa/pos-store-django)
 
-### 🚨 Nota
+
+## Creación de la instancia
+aqui voy a poner pasos para la creación de la instancia
+
+## Entrar al PuTTY
+Pasos para entrar al putty
+
+### 🚨 Nota (esto lo tengo que sacar)
 La instancia debe estar creada previamente y el programa PuTTY ya abierto.
 
 ## 🚧 Proceso de creación 
