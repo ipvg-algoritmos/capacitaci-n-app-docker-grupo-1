@@ -50,22 +50,22 @@ cd Tucarpeta
 git clone https://github.com/wdavilav/pos-store.git .
 ```
 
-### Ejecutamos Python3 (agregado hoy)
+### 7) Ejecutamos Python3 (agregado hoy)
 ```bash
 python3 -m venv env
 ```
 
-### Utilizamos esta fuente (agregado hoy)
+### 8) Utilizamos esta fuente (agregado hoy)
 ```bash
 source env/bin/activate
 ```
 
-### Instalamos estos recursos (agregado hoy)
+### 9) Instalamos estos recursos (agregado hoy)
 ```bash
 pip install -r deploy/txt/requirements.txt
 ```
 
-### 7) Creación del Docker
+### 10) Creación del Docker
 ```bash
 vim Dockerfile
 ```
