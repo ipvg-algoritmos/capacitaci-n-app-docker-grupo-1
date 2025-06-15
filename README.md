@@ -152,6 +152,10 @@ password: hacker94
 
 # Creación de base de datos en AWS
 
+```bash
+FOTOS DE CREACION DE BASE DE DATOS (FALTA)
+```
+
 # Conectar Base de datos RDS PostgreSQL a proyecto POS-VENTA Django
 
 ### 🚨 Nota (esto lo tengo que sacar)
