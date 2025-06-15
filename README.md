@@ -11,8 +11,35 @@ Proyecto basado en el repositorio de:
 Repositorio de apoyo: [https://github.com/patobalboa/pos-store-django](https://github.com/patobalboa/pos-store-django)
 
 
-## Creación de la instancia
-aqui voy a poner pasos para la creación de la instancia
+# Creación de la instancia
+A continuación se mostrará un paso a paso de la creacion de una instancia:
+### Paso 1: Asignar un nombre a la instancia.
+![alt text](image-1.png)
+
+### Paso 2: Seleccionar imagen y sistema operativo.
+Se selecciona el sistema operativo Ubuntu con una versión de imagen Ubuntu Server 22.04.
+
+![alt text](image-2.png)
+
+### Paso 3: Seleccionar tipo de instancia.
+El tipo de instancia elegído es t2.micro.
+![alt text](image-3.png)
+
+### Paso 4: Crear o Usar par de claves existentes.
+![alt text](image-4.png)
+
+### Paso 5: Configuración de redes
+En este apartado no modificamos nada
+![alt text](image-5.png)
+
+### paso 6: Configurar almacenamiento (No se si esta bueno)
+Usamos esta configuración de almacenamiento.
+![alt text](image-6.png)
+
+## Finalmente se lanza la instancia en AWS.
+
+# Creación de base de datos en AWS
+
 
 ## Entrar al PuTTY
 Pasos para entrar al putty
