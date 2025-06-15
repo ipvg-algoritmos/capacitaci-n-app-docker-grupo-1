@@ -38,9 +38,6 @@ Usamos esta configuración de almacenamiento.
 
 ## Finalmente se lanza la instancia en AWS.
 
-# Creación de base de datos en AWS
-
-
 ## Entrar al PuTTY
 Pasos para entrar al putty
 
@@ -99,46 +96,6 @@ source env/bin/activate
 pip install -r deploy/txt/requirements.txt
 ```
 
-### 10) Creación del Docker
-```bash
-vim Dockerfile
-```
-Esto se pega dentro del Dockerfile
-```bash
-# Dockerfile
-FROM python:3.10-slim
-
-# Instalar dependencias necesarias
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpango1.0-0 \
-    libgdk-pixbuf2.0-0 \
-    libffi-dev \
-    libcairo2 \
-    && apt-get clean
-
-# Crear directorio de trabajo
-WORKDIR /app
-
-# Copiar requerimientos e instalar
-COPY deploy/txt/requirements.txt /app/requirements.txt
-RUN pip install --upgrade pip && pip install -r requirements.txt
-
-# Copiar el resto del proyecto
-COPY . .
-
-# Copiar el entrypoint
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
-
-# Puerto expuesto
-EXPOSE 8080
-
-# EntryPoint y comando por defecto
-ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
-```
-
 ## 📋 Pasos para la instalación
 
 ### 1) Crear entorno virtual
@@ -192,3 +149,137 @@ python manage.py runserver 0.0.0.0:8080
 username: admin
 password: hacker94
 ```
+
+# Creación de base de datos en AWS
+
+# Conectar Base de datos RDS PostgreSQL a proyecto POS-VENTA Django
+
+### 🚨 Nota (esto lo tengo que sacar)
+La Base de datos RDS PostgreSQL debe estar creada previamente y el programa PuTTY ya abierto.
+
+### 1) Nos vamos a la carpeta donde clonamos nuestro proyecto
+```bash
+cd /ruta/del/proyecto
+```
+
+### 2) Activamos entorno virtual
+```bash
+source env/bin/activate
+```
+
+### 3) Instalamos driver de postgreSQL
+```bash
+pip install psycopg2-binary
+```
+
+### 4) Guardamos datos SQLite (BD predeterminada de Django) en un formato JSON
+```bash
+python manage.py dumpdata > data.json
+```
+
+### 5) Vamos a settings.py
+```bash
+cd config/
+nano settings.py
+```
+
+### 6) Vamos a settings.py
+```bash
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'NOMBRE BASE DE DATOS',
+        'USER': 'NOMBRE USUARIO',
+        'PASSWORD': 'CONTRASEÑA',
+        'HOST': 'HOST BASE DE DATOS',
+        'PORT': '5432',
+    }
+}
+
+```
+### 7) Instalamos cliente de PostgreSQL para ingresar a su consola
+```bash
+sudo apt install postgresql-client
+```
+
+### 8) Nos metemos a la base de datos predeterminada de PostgreSQL en RDS
+```bash
+psql -h HOST BASE DE DATOS -p 5432 -U USUARIO -d postgres - w
+```
+
+### 9) Revisamos bases de datos existentes en nuestra RDS
+```bash
+\l
+```
+
+### 10) Deberian salir estas bases de datos.
+```bash
+- postgress
+- rdsadin
+- template0
+- template1
+```
+
+### 11) Creamos nuetra base de datos (BD que creamos en AWS)
+```bash
+CREATE DATABASE "NOMBRE BASE DE DATOS" WITH OWNER USUARIO BASE DE DATOS;
+```
+
+### 12) Nos salimos
+```bash
+\q
+```
+
+### 13) Cargamos ahora la data.json que contiene los datos de SQLite, con esto los cargamos 
+```bash
+python manage.py loaddata data.json
+```
+
+### 13) Migramos y deberia estar todo bien!
+```bash
+python manage.py migrate
+```
+
+# Creación de Docker
+
+### 1) Creamos Dockerfile 
+```bash
+nano Dockerfile
+```
+Esto se pega dentro del Dockerfile
+```bash
+# Dockerfile
+FROM python:3.10-slim
+
+# Instalar dependencias necesarias
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpango1.0-0 \
+    libgdk-pixbuf2.0-0 \
+    libffi-dev \
+    libcairo2 \
+    && apt-get clean
+
+# Crear directorio de trabajo
+WORKDIR /app
+
+# Copiar requerimientos e instalar
+COPY deploy/txt/requirements.txt /app/requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Copiar el resto del proyecto
+COPY . .
+
+# Copiar el entrypoint
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# Puerto expuesto
+EXPOSE 8080
+
+# EntryPoint y comando por defecto
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+```
+
+
