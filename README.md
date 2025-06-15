@@ -41,7 +41,7 @@ Usamos esta configuración de almacenamiento.
 ## Entrar al PuTTY
 Pasos para entrar al putty
 
-### 🚨 Nota (esto lo tengo que sacar)
+### 🚨 Nota 
 La instancia debe estar creada previamente y el programa PuTTY ya abierto.
 
 ## 🚧 Proceso de creación 
@@ -158,7 +158,7 @@ FOTOS DE CREACION DE BASE DE DATOS (FALTA)
 
 # Conectar Base de datos RDS PostgreSQL a proyecto POS-VENTA Django
 
-### 🚨 Nota (esto lo tengo que sacar)
+### 🚨 Nota
 La Base de datos RDS PostgreSQL debe estar creada previamente y el programa PuTTY ya abierto.
 
 ### 1) Nos vamos a la carpeta donde clonamos nuestro proyecto
