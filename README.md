@@ -81,17 +81,17 @@ cd Tucarpeta
 git clone https://github.com/wdavilav/pos-store.git .
 ```
 
-### 7) Ejecutamos Python3 (agregado hoy)
+### 7) Ejecutamos Python3
 ```bash
 python3 -m venv env
 ```
 
-### 8) Utilizamos esta fuente (agregado hoy)
+### 8) Utilizamos esta fuente
 ```bash
 source env/bin/activate
 ```
 
-### 9) Instalamos estos recursos (agregado hoy)
+### 9) Instalamos estos recursos
 ```bash
 pip install -r deploy/txt/requirements.txt
 ```
