@@ -246,7 +246,27 @@ python manage.py migrate
 
 # Creación de Docker
 
-### 1) Creamos Dockerfile 
+### 1) Agrega el repositorio oficial de Docker
+```bash
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+
+### 2) Instala Docker y Docker Compose
+```bash
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+```
+
+### 3) Creamos Dockerfile 
 ```bash
 nano Dockerfile
 ```
@@ -285,5 +305,51 @@ EXPOSE 8080
 ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
 ```
+
+### 4) Creamos archivo entrypoint.sh
+```bash
+nano entrypoint.sh
+```
+
+### 5) Configuramos entrypoint.sh
+```bash
+#!/bin/bash
+
+# Migraciones
+echo "📦 Ejecutando makemigrations y migrate"
+python manage.py makemigrations
+python manage.py migrate 
+
+# Carga de datos iniciales
+echo "📥 Cargando datos iniciales"
+python manage.py shell --command='from core.init import *'
+echo "📦 Cargando datos de ejemplo"
+python manage.py shell --command='from core.utils import *'
+
+# Arrancar servidor
+echo "🚀 Iniciando servidor Django"
+exec "$@"
+```
+
+### 6) Hazlo ejecutable:
+```bash
+chmod +x entrypoint.sh
+```
+
+### 7) Construye la imagen Docker
+```bash
+docker build -t pos-store:latest .
+```
+
+### 8) Ejecuta el contenedor
+```bash
+docker run -it --rm -p 80:8080 pos-store:latest
+```
+
+
+
+
+
+
 
 
