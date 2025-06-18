@@ -376,6 +376,10 @@ http://<IP-EC2>:8080
 
 ![image](https://github.com/user-attachments/assets/8af1a63e-5037-4638-bfda-46e77d1f6c67)
 
+## Pueden probar metiendose a este LINK!
+
+ http://www.appdjango.ct.ws/
+
 # Creación de Docker
 
 ### 1) Agrega el repositorio oficial de Docker
