@@ -244,6 +244,61 @@ python manage.py loaddata data.json
 python manage.py migrate
 ```
 
+# Integracion de Balanceador de carga y Auto Scaling
+
+## PASO 1:
+
+# Crear archivo de servicio systemd en PUTTY 
+```bash
+sudo nano /etc/systemd/system/django-pos.service
+```
+
+# Pegar esto
+```bash
+[Unit]
+Description=Django POS App Service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/webdjango
+ExecStart=/root/webdjango/env/bin/python /root/webdjango/manage.py runserver 0.0.0.0:8080
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+# Recargar systemd y habilitar el servicio
+```bash
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable django-pos.service
+
+```
+
+# Iniciar el servicio
+```bash
+sudo systemctl start django-pos.service
+
+```
+
+# Verificar
+```bash
+http://<IP-EC2>:8080
+
+```
+
+## PASO 2: 
+
+## Primero crear AMI (Imagen de nuestra instancia)
+
+### Ir a la instancia, y crear AMI
+Usamos esta configuración de almacenamiento.
+![alt text]![image](https://github.com/user-attachments/assets/0bd84c80-d46e-4fcf-9cc5-7dd1ca750f39)
+
+
 # Creación de Docker
 
 ### 1) Agrega el repositorio oficial de Docker
