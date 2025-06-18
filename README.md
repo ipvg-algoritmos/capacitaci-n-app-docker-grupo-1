@@ -536,7 +536,7 @@ docker run -it --rm -p 80:8080 pos-store:latest
 docker login -u (nombre user) -p (contraseña)
 ```
 
-### 8) Para subir a DockerHub, primero logearse en el PUTTY
+### 10) Para subir a DockerHub, primero logearse en el PUTTY
 ```bash
 docker push bastiansalvo/pos-store:latest
 ```
