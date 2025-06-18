@@ -526,10 +526,24 @@ chmod +x entrypoint.sh
 docker build -t pos-store:latest .
 ```
 
-### 8) Ejecuta el contenedor
+### 8) Ejecuta el contenedor ((Utilizar solo si no se esta ocupando el puerto 8080)
 ```bash
 docker run -it --rm -p 80:8080 pos-store:latest
 ```
+
+### 9) Para subir a DockerHub, primero logearse en el PUTTY
+```bash
+docker login -u (nombre user) -p (contraseña)
+```
+
+### 8) Para subir a DockerHub, primero logearse en el PUTTY
+```bash
+docker push bastiansalvo/pos-store:latest
+```
+
+
+
+
 
 
 
