@@ -294,9 +294,29 @@ http://<IP-EC2>:8080
 
 ## Primero crear AMI (Imagen de nuestra instancia)
 
-### Ir a la instancia, y crear AMI
-Usamos esta configuración de almacenamiento.
-![alt text]![image](https://github.com/user-attachments/assets/0bd84c80-d46e-4fcf-9cc5-7dd1ca750f39)
+### Ir a la instancia, y crear AMI de nuestra instancia principal
+
+![image](https://github.com/user-attachments/assets/e17d4a39-cafd-435c-baf0-5356c8f9339d)
+
+## PASO 3. 
+
+## Crear una plantilla de lanzamiento
+
+![image](https://github.com/user-attachments/assets/6cafe631-ed88-4fe5-a79d-b7c4519ed116)
+
+## Habilitar
+
+![image](https://github.com/user-attachments/assets/807e0e04-6796-429b-a12a-db414b1325fd)
+
+## Utilizamos la AMI que utilizamos
+
+![image](https://github.com/user-attachments/assets/80a85f65-09ce-441b-a691-1d28c38fdf15)
+
+## Ponemos el t2.micro
+
+![image](https://github.com/user-attachments/assets/f3832334-d836-4288-9bda-f948d1f0b835)
+
+
 
 
 # Creación de Docker
