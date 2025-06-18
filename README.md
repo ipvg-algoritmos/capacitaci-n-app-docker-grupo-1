@@ -368,7 +368,7 @@ http://<IP-EC2>:8080
 
 ![image](https://github.com/user-attachments/assets/9abf80d5-39ec-46b5-aca6-07d978567773)
 
-## Despues puedes agregar un dominio en la pagina 
+## Despues puedes agregar un dominio en la pagina INFINITYFREE 
 
 ![image](https://github.com/user-attachments/assets/938fd22c-d0ac-4c61-992a-79afe8c1c375)
 
