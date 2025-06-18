@@ -316,8 +316,65 @@ http://<IP-EC2>:8080
 
 ![image](https://github.com/user-attachments/assets/f3832334-d836-4288-9bda-f948d1f0b835)
 
+## Importante dejar sin Subred
 
+![image](https://github.com/user-attachments/assets/a0b83a69-b1b4-4b9a-b5be-dbfaa2aaefec)
 
+## La creamos!
+
+### PASO 4: Crear Auto Scaling
+
+## Colocamos la plantilla que creamos.
+
+![image](https://github.com/user-attachments/assets/a13304df-b5c1-4066-9e39-62615f46bf3d)
+
+## Colocamos las Zonas de disponibilidad
+
+![image](https://github.com/user-attachments/assets/67f42503-fc8c-4114-aa1d-c068be4e0ff2)
+
+## Creamos de aqui mismo un Balanceador de Carga
+
+![image](https://github.com/user-attachments/assets/826e1791-9608-4ad8-a711-c6ac4cc6a403)
+
+## Que sea de "INTERNAL FACING" para que sea DNS Publico
+
+![image](https://github.com/user-attachments/assets/c580709b-df5a-4022-897c-feab680e2b0f)
+
+## Importante colocar puerto 8080 en el Grupo de destino que crearemos aqui mismo
+
+![image](https://github.com/user-attachments/assets/2072dfb3-ba5c-4cbc-b602-66036f185fe3)
+
+## Activamos esta funcion
+
+![image](https://github.com/user-attachments/assets/c5a46df2-724a-49ec-a5b5-14c9b174b7f2)
+
+## Importante dejar de esta manera, para que solo hayan 2 instancias
+
+![image](https://github.com/user-attachments/assets/04d00a50-5227-45ec-8c4f-664a81b07740)
+
+## Lo demas por predeterminado y listo!
+
+![image](https://github.com/user-attachments/assets/7a9c90df-9930-46fe-b3f0-f0368de750ea)
+
+## En grupos de destino que fue creado, podemos ver que esta HEALTHY 
+
+![image](https://github.com/user-attachments/assets/1e12287a-5d2f-4495-9f01-f78001229894)
+
+## Nos vamos a nuestra instancia creada por el Auto Scaling y copiamos la IP
+
+![image](https://github.com/user-attachments/assets/0b19ec4d-8d8e-49eb-8f99-6fb6dfbd553a)
+
+## Vemos que corre correctamente la pagina!
+
+![image](https://github.com/user-attachments/assets/9abf80d5-39ec-46b5-aca6-07d978567773)
+
+## Despues puedes agregar un dominio en la pagina 
+
+![image](https://github.com/user-attachments/assets/938fd22c-d0ac-4c61-992a-79afe8c1c375)
+
+## Comprobando que esta la pagina abierta a todo publico
+
+![image](https://github.com/user-attachments/assets/8af1a63e-5037-4638-bfda-46e77d1f6c67)
 
 # Creación de Docker
 
