@@ -34,9 +34,59 @@ En este apartado no modificamos nada
 
 ### paso 6: Configurar almacenamiento (No se si esta bueno)
 Usamos esta configuración de almacenamiento.
-![alt text](image-6.png)
+![alt text](image-7.png)
 
-## Finalmente se lanza la instancia en AWS.
+# Creacion de la base de datos Amazon RDS for
+
+### Paso 1
+![alt text](image-8.png)
+
+### Paso 2
+Seleccionamos la creación estandar y el motor que usaremos es el PostgreSQL.
+
+![alt text](image-9.png)
+
+### Paso 3
+Seleccionamos la versión del motor.
+
+![alt text](image-10.png)
+
+### Paso 4
+En la platilla seleccionamos la capa gratuita.
+
+![alt text](image-11.png)
+
+### Paso 5
+La disponibilidad se selecciona por defecto a al momento de elegir la capa gratuita.
+
+![alt text](image-12.png)
+
+### Paso 6
+Configuramos tanto el nombre como la contraseña.
+
+![alt text](image-13.png)
+
+### Paso 7
+Configuración de la instancia seleccionamos el bd.t3.micro.
+![alt text](image-14.png)
+
+
+### Paso 8
+En el almacenamiento usamos un SSD de uso general gp2 y un almacenamiento de 20gb.
+![alt text](image-15.png)
+
+### Paso 9
+Elegimos el Conectarse a un recurso informático de EC2 y seleccionamos la instancia a la que queremos agregarle la base de datos.
+
+![alt text](image-16.png)
+
+### Paso 10
+Configuración de la Nube privada virtual
+
+![alt text](image-17.png)
+
+### Paso 11
+
 
 ## Entrar al PuTTY
 Pasos para entrar al putty
