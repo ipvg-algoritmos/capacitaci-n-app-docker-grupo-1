@@ -81,18 +81,17 @@ Elegimos el Conectarse a un recurso informático de EC2 y seleccionamos la insta
 ![alt text](image-16.png)
 
 ### Paso 10
-Configuración de la Nube privada virtual
+Configuración de la Nube privada virtual.
 
 ![alt text](image-17.png)
 
 ### Paso 11
+Crear la base de datos.
+
+![alt text](image-18.png)
 
 
-## Entrar al PuTTY
-Pasos para entrar al putty
-
-### 🚨 Nota 
-La instancia debe estar creada previamente y el programa PuTTY ya abierto.
+# Estos pasos se hacen en el PuTTY
 
 ## 🚧 Proceso de creación 
 
